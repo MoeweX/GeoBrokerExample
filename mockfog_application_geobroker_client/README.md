@@ -2,7 +2,7 @@ mockfog_application_geobroker_client
 =========
 
 Rolls out a geobroker client and configures it using the hostvars set by mockfog_topology.
-The respective playbook is placed in the parent directory (`mockfog_application_geobroker.yml`, will also create servers).
+The respective playbook is placed in the parent directory (`mockfog_application.yml`, will also create servers).
 
 Tags:
 - deploy: roll out and start application, delete priorly running instances and data
