@@ -1,8 +1,8 @@
-mockfog_application
+mockfog_application_geobroker_server
 =========
 
-Rolls out a ping application and configures it using the hostvars set by mockfog_topology.
-The respective playbook is placed in the parent directory.
+Rolls out a geobroker server and configures it using the hostvars set by mockfog_topology.
+The respective playbook is placed in the parent directory (`mockfog_application_geobroker.yml`, will also create clients).
 
 Tags:
 - deploy: roll out and start application, delete priorly running instances and data

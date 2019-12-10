@@ -1,0 +1,21 @@
+---
+- name: Make log folder
+  shell: "mkdir -p {{ folder }}/logs"
+
+- name: Save sent messages
+  copy:
+    remote_src: yes
+    src: "{{ folder }}/files/multifile/wasSent.txt"
+    dest: "{{ folder }}/logs/wasSent_{{ hostvars[inventory_hostname].testbed_config.name }}.txt"
+
+- name: Save received messages
+  copy:
+    remote_src: yes
+    src: "{{ folder }}/files/multifile/wasReceived.txt"
+    dest: "{{ folder }}/logs/wasReceived_{{ hostvars[inventory_hostname].testbed_config.name }}.txt"
+
+- name: Get logs
+  synchronize:
+    mode: pull
+    src: "{{ folder }}/logs/"
+    dest: logs/

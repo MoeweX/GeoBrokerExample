@@ -1,0 +1,48 @@
+---
+- name: Delete old folders
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ folder }}"
+
+- name: Install Docker SDK
+  pip:
+    name: docker
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+
+- name: Create client application folder
+  file:
+    path: "{{ folder }}"
+    state: directory
+
+- name: Create files folder
+  file:
+    path: "{{ folder }}/files"
+    state: directory
+
+- name: Copy csv files to remote
+  unarchive:
+    src: "hiking/{{ hostvars[inventory_hostname].testbed_config.name }}.zip"
+    dest: "{{ folder }}/files"
+
+- name: Write logging config
+  template:
+    src: log4j2.xml.j2
+    dest: "{{ folder }}/files/log4j2.xml"
+
+- name: Kill all running docker containers
+  shell: docker rm --force $(docker ps -aq) || true
+
+- name: Pull client image
+  docker_image:
+    name: njapke/geobroker-client
+    source: pull
+    force_source: yes
+
+- name: Start geobroker client
+  shell: "docker run -d -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync njapke/geobroker-client -d /files/multifile -i {{ hostvars[inventory_hostname].testbed_config.app_configs[0].internal_ip }} -l /files/log4j2.xml"

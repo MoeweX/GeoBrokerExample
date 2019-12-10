@@ -1,0 +1,37 @@
+Setup:
+	minTravelSpeed: 2
+	maxTravelSpeed: 8
+	minTravelTime: ~5s
+	maxTravelTime: ~30s
+	brokerNames: [Columbus, Frankfurt, Paris]
+	brokerAreas: [BUFFER (POINT (-82.999083 39.961332), 5), BUFFER (POINT (8.663124 50.106732), 2.1), BUFFER (POINT (2.359708 48.877366), 2.1)]
+	workloadMachinesPerBroker: [2, 0, 0]
+	clientsPerBrokerArea: [200, 0, 0]
+	roadConditionSubscriptionGeofenceDiameter: 0.004496601838808317
+	roadConditionMessageGeofenceDiameter: 0.004496601838808317
+	minTextBroadcastSubscriptionGeofenceDiameter: 0.008993203677616635
+	maxTextBroadcastSubscriptionGeofenceDiameter: 0.44966018388083173
+	minTextBroadcastMessageGeofenceDiameter: 0.008993203677616635
+	maxTextBroadcastMessageGeofenceDiameter: 0.44966018388083173
+	roadConditionPublicationProbability: 10
+	textBroadcastPublicationProbability: 50
+	roadConditionPayloadSize: 100
+	minTextBroadcastPayloadSize: 10
+	maxTextBroadcastPayloadSize: 1000
+	directoryPath: ./hiking
+	roadConditionTopic: road
+	textBroadcastTopic: text
+	topicPermutations: 1
+	subscriptionRenewalDistance: ~50m
+	warmupTime: ~5s
+	timeToRunPerClient: ~900s
+
+Data set characteristics:
+    Number of ping messages: 10742 (11.935555555555556 messages/s)
+    Number of subscribe messages: 7172 (7.9688888888888885 messages/s)
+    Number of publish messages: 6212 (6.902222222222222 messages/s)
+    Publish payload size: 2732.377KB (439 bytes/message)
+    Client distance travelled: 227.3735083333336km (1.136867541666668 km/client)
+    Client average speed: 4.547470166666672 km/h
+    Number of message geofence broker overlaps: 0
+    Number of subscription geofence broker overlaps: 0

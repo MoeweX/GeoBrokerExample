@@ -41,11 +41,18 @@ def edge_attrs(**kwargs):
     return attrs
 
 
-def app_config(**kwargs):
+def client_config(**kwargs):
     config = {
         **kwargs,
     }
-    assert 'timeout' in config
+    assert 'connect_to' in config
+    return config
+
+
+def broker_config(**kwargs):
+    config = {
+        **kwargs,
+    }
     return config
 
 
@@ -103,5 +110,8 @@ def resolve_names(g):
                      attrs['type'] == 'machine']
     for node, attrs in machine_nodes:
         for config in attrs['app_configs']:
-            config['internal_ip'] = name_to_ip[config['connect_to']]
+            if attrs['role'] == 'broker':
+                pass
+            elif attrs['role'] == 'client':
+                config['internal_ip'] = name_to_ip[config['connect_to']]
         g.node[node]['app_configs'] = attrs['app_configs']

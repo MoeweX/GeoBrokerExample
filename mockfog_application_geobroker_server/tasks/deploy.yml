@@ -1,0 +1,48 @@
+---
+- name: Delete old folders
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ folder }}"
+
+- name: Install Docker SDK
+  pip:
+    name: docker
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+
+- name: Create server application folder
+  file:
+    path: "{{ folder }}"
+    state: directory
+
+- name: Create files folder
+  file:
+    path: "{{ folder }}/files"
+    state: directory
+
+- name: Write server config
+  template:
+    src: configuration_template.toml.j2
+    dest: "{{ folder }}/files/configuration_template.toml"
+
+- name: Write logging config
+  template:
+    src: log4j2.xml.j2
+    dest: "{{ folder }}/files/log4j2.xml"
+
+- name: Kill all running docker containers
+  shell: docker rm --force $(docker ps -aq) || true
+
+- name: Pull server image
+  docker_image:
+    name: hasenburg/geobroker-server
+    source: pull
+    force_source: yes
+
+- name: Start geobroker server
+  shell: "docker run -d -p 5559:5559 -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync hasenburg/geobroker-server /files/configuration_template.toml"
