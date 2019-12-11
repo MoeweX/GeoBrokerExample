@@ -90,4 +90,4 @@ instances are copied to `/geobroker_client/files/multifile` (VM) and mounted in 
 
 ## Experiment Visualization
 
-TODO
+The visualization folder contains a Jupyter notebook for result visualization. It should work out of the box, if your experiment results are stored at `logs/`.
