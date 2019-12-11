@@ -40,9 +40,9 @@
 
 - name: Pull client image
   docker_image:
-    name: njapke/geobroker-client
+    name: "{{ docker_image }}"
     source: pull
     force_source: yes
 
 - name: Start geobroker client
-  shell: "docker run -d -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync njapke/geobroker-client -d /files/multifile -i {{ hostvars[inventory_hostname].testbed_config.app_configs[0].internal_ip }} -l /files/log4j2.xml"
+  shell: "docker run -d -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync {{ docker_image }} -d /files/multifile -i {{ hostvars[inventory_hostname].testbed_config.app_configs[0].internal_ip }} -l /files/log4j2.xml"

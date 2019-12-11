@@ -3,47 +3,47 @@ nodes:
 - type: machine
   flavor: t3.nano
   bandwidth_out: 10000
-  internal_ip: 10.0.2.122
+  internal_ip: 10.0.2.32
   role: broker
   app_configs:
   - {}
   name: broker1
   delay_paths:
   - target: client1
-    internal_ip: 10.0.2.164
+    internal_ip: 10.0.2.163
     value: 5
   - target: client2
-    internal_ip: 10.0.2.184
+    internal_ip: 10.0.2.220
     value: 10
 - type: machine
   flavor: t3.nano
   bandwidth_out: 10000
-  internal_ip: 10.0.2.164
+  internal_ip: 10.0.2.163
   role: client
   app_configs:
   - connect_to: broker1
-    internal_ip: 10.0.2.122
+    internal_ip: 10.0.2.32
   name: client1
   delay_paths:
   - target: broker1
-    internal_ip: 10.0.2.122
+    internal_ip: 10.0.2.32
     value: 5
   - target: client2
-    internal_ip: 10.0.2.184
+    internal_ip: 10.0.2.220
     value: 15
 - type: machine
   flavor: t3.nano
   bandwidth_out: 10000
-  internal_ip: 10.0.2.184
+  internal_ip: 10.0.2.220
   role: client
   app_configs:
   - connect_to: broker1
-    internal_ip: 10.0.2.122
+    internal_ip: 10.0.2.32
   name: client2
   delay_paths:
   - target: broker1
-    internal_ip: 10.0.2.122
+    internal_ip: 10.0.2.32
     value: 10
   - target: client1
-    internal_ip: 10.0.2.164
+    internal_ip: 10.0.2.163
     value: 15

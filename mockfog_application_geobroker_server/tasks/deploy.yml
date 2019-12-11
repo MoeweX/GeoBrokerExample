@@ -40,9 +40,9 @@
 
 - name: Pull server image
   docker_image:
-    name: hasenburg/geobroker-server
+    name: "{{ docker_image }}"
     source: pull
     force_source: yes
 
 - name: Start geobroker server
-  shell: "docker run -d -p 5559:5559 -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync hasenburg/geobroker-server /files/configuration_template.toml"
+  shell: "docker run -d -p 5559:5559 -v {{ folder }}/files:/files -v {{ folder }}/logs:/logs_sync {{ docker_image }} /files/configuration_template.toml"

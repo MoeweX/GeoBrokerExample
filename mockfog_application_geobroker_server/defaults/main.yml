@@ -1,4 +1,4 @@
 ---
 # defaults file for mockfog_application
 folder: /geobroker_server
-container_name: geobroker_server
+docker_image: hasenburg/geobroker-server
